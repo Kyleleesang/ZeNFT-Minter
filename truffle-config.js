@@ -45,6 +45,9 @@ module.exports = {
       network_id: "*",       // Any network (default: none)
      },
      matic: {
+      //settings for alchemy 
+      //Mainnet: https://polygon-mainnet.g.alchemy.com/v2/your-api-key
+      //Mumbai:  https://polygon-mumbai.g.alchemy.com/v2/your-api-key
       provider: () => new HDWalletProvider(mnemonic, `https://rpc-mumbai.maticvigil.com`),
       network_id: 80001,
       confirmations: 2,
@@ -86,7 +89,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.4",    // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.8.2",    // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       //  optimizer: {

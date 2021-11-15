@@ -1,4 +1,5 @@
 import './App.css';
+import React, { Component }  from 'react';
 import Minter from './Minter'
 
 function App() {

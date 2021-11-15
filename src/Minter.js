@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import React, { Component }  from 'react';
 import { connectWallet, getCurrentWalletConnected, mintNFT //import here
 } from "./utils/interact.js";
 
