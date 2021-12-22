@@ -48,7 +48,7 @@ contract ZRoyalties is Initializable, ERC20Upgradeable, ERC20BurnableUpgradeable
         super._beforeTokenTransfer(from, to, amount);
     }
 
-    function _authorizeUpgrade(address newImplementation) internal onlyOwner override{\
+    function _authorizeUpgrade(address newImplementation) internal onlyOwner override{
     }
 
     // The following functions are overrides required by Solidity.

@@ -1,8 +1,6 @@
 /* libraries used */
 
 const truffleAssert = require('truffle-assertions');
-
-
 const vals = require('../lib/testValuesCommon.js');
 
 
@@ -20,9 +18,9 @@ const MockProxyRegistry = artifacts.require(
 const toBN = web3.utils.toBN;
 
 
-contract("ERC1155Tradable - ERC 1155", (accounts) => {
-  const NAME = 'ERC-1155 Test Contract';
-  const SYMBOL = 'ERC1155Test';
+contract("ZeNFT", (accounts) => {
+  const NAME = 'ZeNFT';
+  const SYMBOL = 'Zen';
 
   const INITIAL_TOKEN_ID = 1;
   const NON_EXISTENT_TOKEN_ID = 99999999;
