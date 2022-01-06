@@ -3,21 +3,24 @@ pragma solidity ^0.8.2;
 
 import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import './zNFT.sol';
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-contract Market {
+contract Market is ReentrancyGuard  {
+
   enum Categories {
       ART, GAME, DEFI, MEMES
       }
   struct Auction {
     address payable seller;
-    uint minBid;
+    uint128 minBid;
+    uint256 tokenID;
+    address nftcontract;
     Categories category;
     uint endDate;
     address payable highestBidAddress;
     uint highestBidAmount;
   }
   mapping(address => mapping(uint => Auction)) public auctions;
-
   event AuctionCreated(
     address tokenAddress,
     uint tokenId,
@@ -79,3 +82,14 @@ contract Market {
     }
   }
 }
+
+
+    /*
+     * Check if a bid has been made. This is applicable in the early bid scenario
+     * to ensure that if an auction is created after an early bid, the auction
+     * begins appropriately or is settled if the buy now price is met.
+     */
+    function _isBidMade(address _nftContractAddress, uint256 _tokenId) internal view returns (bool){
+        return (nftContractAuctions[_nftContractAddress][_tokenId]
+            .nftHighestBid > 0);
+    }

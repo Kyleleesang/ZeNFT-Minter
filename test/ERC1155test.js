@@ -1,5 +1,4 @@
 /* libraries used */
-
 const truffleAssert = require('truffle-assertions');
 const vals = require('../lib/testValuesCommon.js');
 

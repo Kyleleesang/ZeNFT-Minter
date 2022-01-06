@@ -12,17 +12,18 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 //imports from the lazy minting guide
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
-import "@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol";
+import "@openzeppelin/contracts-upgradeable/utils/cryptography/draft-EIP712Upgradeable.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
 
 //ZeNFT implementation for ERC721's
-contract ZNFT is Initializable, ERC721Upgradeable, EIP712, ERC721URIStorageUpgradeable, PausableUpgradeable, AccessControlUpgradeable, ERC721BurnableUpgradeable, UUPSUpgradeable {
+abstract contract ZNFT is Initializable, ERC721Upgradeable, EIP712Upgradeable, ERC721URIStorageUpgradeable, PausableUpgradeable, AccessControlUpgradeable, ERC721BurnableUpgradeable, UUPSUpgradeable {
     //lazy minter stuff
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
-    string private constant SIGNING_DOMAIN = "LazyNFT-Voucher";
-    string private constant SIGNATURE_VERSION = "1";
+    bytes32 public constant UPGRADER_ROLE = keccak256("DEFAULT_ADMIN_ROLE");
+    string private constant SIGNING_DOMAIN = "ZeNFT-Minter";
+    string private constant SIGNATURE_VERSION = "1.0";
     //royalties
     address public artist;
     address public txFeeToken;
@@ -34,12 +35,14 @@ contract ZNFT is Initializable, ERC721Upgradeable, EIP712, ERC721URIStorageUpgra
     CountersUpgradeable.Counter private _tokenIdCounter;
     constructor() initializer {}
 
-    function initialize(address payable minter) EIP712(SIGNING_DOMAIN, SIGNATURE_VERSION)  initializer public {
+    function initialize(address payable minter) initializer public {
         __ERC721_init("zNFT", "Zens");
+        __EIP712_init("ZeNFT", "1.0");
         __ERC721URIStorage_init();
         __Pausable_init();
         __ERC721Burnable_init();
         __UUPSUpgradeable_init();
+        __AccessControl_init();
 
         _setupRole(MINTER_ROLE, minter);
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
@@ -113,10 +116,8 @@ contract ZNFT is Initializable, ERC721Upgradeable, EIP712, ERC721URIStorageUpgra
   function withdraw() public {
     //hasRole
     require(hasRole(MINTER_ROLE, msg.sender), "Only authorized minters can withdraw");
-    
     // IMPORTANT: casting msg.sender to a payable address is only safe if ALL members of the minter role are payable addresses.
     address payable receiver = payable(msg.sender);
-
     uint amount = pendingWithdrawals[receiver];
     // zero account before transfer to prevent re-entrancy attack
     pendingWithdrawals[receiver] = 0;

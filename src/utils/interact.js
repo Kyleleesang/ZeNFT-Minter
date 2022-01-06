@@ -89,7 +89,7 @@ export const connectWallet = async () => {
     }
   };
 
-  export const mintNFT = async(url, name, description) => {
+  export const mintNFT = async(image, name, description) => {
     
     //error handling
     if (url.trim() == "" || (name.trim() == "" || description.trim() == "")) { 
@@ -98,13 +98,11 @@ export const connectWallet = async () => {
             status: "❗Please make sure all fields are completed before minting.",
         }
     }
-  
     //make metadata
     const metadata = new Object();
     metadata.name = name;
-    metadata.image = url;
+    metadata.image = image;
     metadata.description = description;
-
     //pinata pin request
     const pinataResponse = await pinJSONToIPFS(metadata);
     if (!pinataResponse.success) {
