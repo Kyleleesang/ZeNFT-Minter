@@ -14,7 +14,7 @@ import Masonry from 'react-masonry-css';
 
 
 
-function Profile(){
+function PublicProfile(){
     const [user, setUser] = useState(" ");
     const [joined, setJoined] = useState(" ");
     const [name, setName] = useState(" ");
@@ -228,4 +228,4 @@ Favorited
     );
 }
 
-export default Profile;
+export default PublicProfile;

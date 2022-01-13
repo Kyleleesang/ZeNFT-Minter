@@ -1,0 +1,303 @@
+.nft-image{
+    width:70%;
+    height:70%;
+    margin-left: 15%;
+
+}
+.NFTName{
+    color:rgb(73, 12, 131);
+    font-size:3ch;
+    font-family:Trattatello, fantasy;
+    
+}
+.card-class{
+    width:50%;
+    height: 30%;
+   margin-left: 25%;
+    background-color: rgb(4, 3, 58);
+    border-radius: 1%;
+    
+
+}
+
+.App-header7 {
+    background-color: #a756bb;
+    background-size: 100% 100%;
+    background-image: url(cryptoscape.jpg);
+    min-height: 100vh;
+    
+    
+    
+    font-size: calc(10px + 2vmin);
+    color: white;
+    
+  }
+.label1{
+    background-color: darkorchid;
+    color:rgb(153, 8, 98);
+    background-size: 100% 100%;
+    width:20%;
+    display: inline-block;
+    
+    
+
+}
+.label2{
+    background-color: darkorchid;
+    color:rgb(153, 8, 98);
+    background-size: 100% 100%;
+    width:100%;
+    display: inline-block;
+    height:50%;
+    visibility: collapse;
+    
+
+}
+.label3{
+    background-color: darkorchid;
+    color:rgb(153, 8, 98);
+    background-size: 100% 100%;
+    width:100%;
+    display: inline-block;
+    height:50%;
+   
+    
+    
+
+}
+
+.labelimage{
+    width:30%;
+    height:auto;
+}
+  .nft-button{
+  
+    background-color: #6d04aa; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10%;
+    width:30%;
+    border: 2px solid #6600ba;
+      
+
+  }
+  .nft-button:hover{
+      background-color: black;
+
+  }
+  .buy-box{
+      background-color: rgb(224, 19, 231);
+
+  }
+  .eddiehall1{
+    width:90%;
+    height:20%;
+    border-radius: 5%;
+    
+    
+  }
+  .eddiehall1:hover{
+    border:solid 3px rgb(174, 5, 207);
+    
+
+  }
+  .App1 {
+    
+  }
+  .App-header8 {
+    background-color: #08010c;
+    
+    display:block;
+    font-size: calc(10px + 2vmin);
+    background-image: url(cryptoscape.jpg);
+    background-size: 100% 100%;
+    text-align: center;
+    
+  }
+  .my-masonry-grid1 {
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: flex;
+     /* gutter size offset */
+    width: 120%;
+    margin-left: 1.7%;
+    padding-top: 1%;
+  }
+  .my-masonry-grid_column1 {
+    padding-left: 30px; /* gutter size */
+    /*padding-top:30%;*/
+    background-clip: padding-box;
+    
+  }
+  
+  /* Style your items */
+  .my-masonry-grid_column1 > div { /* change div to reference your elements you put in <Masonry> */
+    background: rgb(5, 19, 80);
+    margin-bottom: 30px;
+    width:100%;
+  }
+  .pdiv{
+      display: inline-block;
+  }
+  .NFTName1{
+    color:rgb(73, 12, 131);
+    font-size:3ch;
+    font-family:Trattatello, fantasy;
+    margin-bottom: 15%;
+      
+    
+    
+  }
+  .nftimage1{
+    
+        width:30%;
+        height:30%;
+        margin-left: 15%;
+    
+
+  }
+  .labelimage1{
+    width:10%;
+    height:auto;
+    margin-top: 1%;
+    margin-left: 60%;
+  
+  }
+  .labelimage2{
+    width:10%;
+    height:auto;
+  
+  }
+  .labelimage3{
+    width:5%;
+    height:auto;
+    margin-left: 60%;
+  
+  }
+  .labelimage4{
+    margin-top: 2%;
+    
+  }
+
+  .labelimage5{
+    width:5%;
+    height:auto;
+    margin-left: 40%;
+  
+  }
+
+  .labela{
+    background-color: darkorchid;
+    color:rgb(153, 8, 98);
+    background-size: 100% 100%;
+    width:20%;
+    display: inline-block;
+    margin-right: 5%;
+    
+    
+    
+
+}
+.labelb{
+    background-color: darkorchid;
+    color:rgb(153, 8, 98);
+    background-size: 100% 100%;
+    width:20%;
+    display: inline-block;
+    margin-right: 5%;
+    
+    
+    
+
+}
+.labelc{
+    background-color: darkorchid;
+    color:rgb(153, 8, 98);
+    background-size: 100% 100%;
+    width:20%;
+    display: inline-block;
+    margin-right: 5%;
+    
+    
+
+}
+.labelimage6{
+    width:5%;
+    height:auto;
+    margin-left: 40%;
+  
+  }
+
+  .label4{
+    background-color: darkorchid;
+    color:rgb(153, 8, 98);
+    background-size: 100% 100%;
+    width:20%;
+    display: inline-block;
+    height:50%;
+    margin-right: 5%;
+    visibility: collapse;
+   
+    
+    
+
+}
+.label4a{
+    background-color: darkorchid;
+    color:rgb(153, 8, 98);
+    background-size: 100% 100%;
+    width:20%;
+    display: inline-block;
+    height:50%;
+    margin-right: 5%;
+   
+    
+    
+
+}
+
+.modal {
+   position:absolute;
+   
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+  }
+  
+  .modal_content {
+    background-color: rgb(92, 6, 141);
+    
+    position: relative;
+    top: 20%;
+    left: 30%;
+    width: 40%;
+    padding: 20px;
+    border-radius: 5px;
+   margin-top: -30%;
+    border: 2px solid rgb(216, 15, 216);
+  }
+  
+  .close {
+    color: Black;
+    float: right;
+  }
+  
+  .close:hover {
+    color: cyan;
+    cursor: pointer;
+  }
+  .offer{
+
+  }
+  .inoffer{
+      background-color: darkorchid;
+     height:30px;
+  }
