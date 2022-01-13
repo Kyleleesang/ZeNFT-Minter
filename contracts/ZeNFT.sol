@@ -22,8 +22,6 @@ contract ZeNFT is Initializable, ERC1155Upgradeable, AccessControlUpgradeable, P
         __AccessControl_init();
         __Pausable_init();
         __ERC1155Burnable_init();
-        
-
         grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         grantRole(URI_SETTER_ROLE, msg.sender);
         grantRole(PAUSER_ROLE, msg.sender);

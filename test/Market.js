@@ -1,5 +1,5 @@
 const Market = artifacts.require('Market.sol');
-const NFT = artifacts.require('MockNFT.sol');
+const NFT = artifacts.require('zNFT.sol');
 const { expectRevert, time } = require('@openzeppelin/test-helpers');
 
 const CATEGORIES = {
@@ -11,7 +11,6 @@ const CATEGORIES = {
 contract('Market', async addresses => {
   const [admin, seller, buyer1, buyer2, buyer3, _] = addresses;
   let market, nft;
-
   beforeEach(async () => {
     market = await Market.new();
     nft = await NFT.new('aaa', 'aaa');

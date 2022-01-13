@@ -123,7 +123,6 @@ abstract contract ZNFT is Initializable, ERC721Upgradeable, EIP712Upgradeable, E
     pendingWithdrawals[receiver] = 0;
     receiver.transfer(amount);
   }
-
   /// notice Retuns the amount of Ether available to the caller to withdraw.
   function availableToWithdraw() public view returns (uint256) {
     return pendingWithdrawals[msg.sender];
