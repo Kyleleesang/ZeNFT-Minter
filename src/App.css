@@ -10,7 +10,6 @@
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
-<<<<<<< HEAD
   }
 }
 
@@ -18,9 +17,7 @@
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-=======
-    
+  flex-direction: column;    
     
   }
 }
@@ -97,18 +94,16 @@
   min-height: 100vh;
   display: flex;
   flex-direction: row;
->>>>>>> 5a37ff0fa0e88095dc4635700089534dae0dd253
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
-<<<<<<< HEAD
 
 .App-link {
   color: #61dafb;
 }
-=======
+
 .App-header1 {
   background-color: #08010c;
   
@@ -184,7 +179,7 @@ margin-right: 10%;
 width:20%;
 height:20%;
 }
->>>>>>> 5a37ff0fa0e88095dc4635700089534dae0dd253
+
 
 @keyframes App-logo-spin {
   from {
@@ -194,8 +189,6 @@ height:20%;
     transform: rotate(360deg);
   }
 }
-<<<<<<< HEAD
-=======
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -295,9 +288,6 @@ margin-bottom: 7%;
 }
 .input4, select, textarea{
   color:rgb(226, 4, 247)
-  
-  
-
 }
 
 
@@ -412,4 +402,3 @@ margin-left: 45%;
   width:97%;
   margin-left: 1%;
 }
->>>>>>> 5a37ff0fa0e88095dc4635700089534dae0dd253

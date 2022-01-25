@@ -1,5 +1,6 @@
 const Market = artifacts.require('Market.sol');
-const NFT = artifacts.require('zNFT.sol');
+const NFT721 = artifacts.require('zNFT.sol');
+const ethers = require('ethers')
 const { expectRevert, time } = require('@openzeppelin/test-helpers');
 
 const CATEGORIES = {
@@ -10,12 +11,12 @@ const CATEGORIES = {
 
 contract('Market', async addresses => {
   const [admin, seller, buyer1, buyer2, buyer3, _] = addresses;
-  let market, nft;
+  let market, nft721;
   beforeEach(async () => {
     market = await Market.new();
-    nft = await NFT.new('aaa', 'aaa');
-    await nft.mint(seller, 1);
-    await nft.approve(market.address, 1, {from: seller});
+    nft721 = await NFT721.new('aaa', 'aaa');
+    await nft721.mint(seller, 1);
+    await nft721.approve(market.address, 1, {from: seller});
     await market.createAuction(
       nft.address,
       1,
@@ -41,7 +42,7 @@ contract('Market', async addresses => {
   it('should NOT create bid', async () => {
     await expectRevert(
       market.createBid(
-        nft.address,
+        nft721.address,
         2,
         {from: buyer1, value: web3.utils.toWei('2')}
       ),
@@ -49,7 +50,7 @@ contract('Market', async addresses => {
     );
     await expectRevert(
       market.createBid(
-        nft.address,
+        nft721.address,
         1,
         {from: buyer1, value: 100}
       ),
@@ -58,7 +59,7 @@ contract('Market', async addresses => {
     await time.increase(7 * 86400 + 1); 
     await expectRevert(
       market.createBid(
-        nft.address,
+        nft721.address,
         1,
         {from: buyer1, value: web3.utils.toWei('2')}
       ),
@@ -67,10 +68,10 @@ contract('Market', async addresses => {
   });
 
   it('should create bid', async () => {
-    const balanceBuyer1Before = await web3.eth.getBalance(buyer1);
-    const balanceBuyer2Before = await web3.eth.getBalance(buyer2);
+    const balanceBuyer1Before = await provider.getBalance(buyer1);
+    const balanceBuyer2Before = await provider.getBalance(buyer2);
     await market.createBid(
-      nft.address,
+      nft721.address,
       1,
       {from: buyer1, value: web3.utils.toWei('2')}
     );
@@ -79,8 +80,8 @@ contract('Market', async addresses => {
       1,
       {from: buyer2, value: web3.utils.toWei('3')}
     );
-    const balanceBuyer1 = await web3.eth.getBalance(buyer1);
-    const balanceBuyer2 = await web3.eth.getBalance(buyer2);
+    const balanceBuyer1 = await provider.getBalance(buyer1);
+    const balanceBuyer2 = await provider.getBalance(buyer2);
 
     //trick to test a balance difference,
     //taking into consideration gas fees
@@ -113,10 +114,10 @@ contract('Market', async addresses => {
     );
 
     await time.increase(7 * 86400 + 1); 
-    const balance1 = web3.utils.toBN(await web3.eth.getBalance(seller));
+    const balance1 = web3.utils.toBN(await provider.getBalance(seller));
     await market.closeBid(nft.address, 1);
     const tokenOwner = await nft.ownerOf(1);
-    const balance2 = web3.utils.toBN(await web3.eth.getBalance(seller));
+    const balance2 = web3.utils.toBN(await provider.getBalance(seller));
     assert(tokenOwner === buyer3);
     assert(balance2.sub(balance1).toString() === web3.utils.toWei('4'));
 

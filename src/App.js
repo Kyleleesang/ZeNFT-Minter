@@ -1,14 +1,6 @@
-<<<<<<< HEAD
 import './App.css';
 import React, { Component }  from 'react';
-import Minter from './Minter'
-
-function App() {
-  return (
-    <div className="App">
-      <Minter></Minter>
-    </div>
-=======
+import Minter from './Minter';
 import logo from './logo.svg';
 import './App.css';
 import { initializeApp } from "firebase/app";
@@ -29,14 +21,13 @@ import NFTProfile from './NFTProfile';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 
-
 function App() {
   
   return (
     
     
     <div >
-      
+                  <Minter></Minter>
             <PrivateRoute exact path="/Profile" component={Profile} />
             <PrivateRoute path="/UpdateProfile" component={UpdateProfile} />
             <PrivateRoute path="/NFT" component={NFT} />
@@ -53,7 +44,7 @@ function App() {
     
     
    
->>>>>>> 5a37ff0fa0e88095dc4635700089534dae0dd253
+//5a37ff0fa0e88095dc4635700089534dae0dd253
   );
 }
 

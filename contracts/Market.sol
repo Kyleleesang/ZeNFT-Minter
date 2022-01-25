@@ -1,16 +1,33 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.2;
+pragma solidity ^0.8.3;
 
 import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import './zNFT.sol';
+import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract Market is ReentrancyGuard  {
+  using Counters for Counters.Counter;
+  Counters.Counter private itemIds;
+  Counters.Counter private itemsSold;
+  //address that is payable to the market owner
+  address payable MarketOwner;
 
-  enum Categories {
-      ART, GAME, DEFI, MEMES
-      }
-  struct Auction {
+  constructor(){
+      MarketOwner = payable(msg.sender);
+  }
+
+    struct MarketItem {
+    uint itemId;
+    address nftContract;
+    uint256 tokenId;
+    address payable seller;
+    address payable MarketOwner;
+    uint256 price;
+    bool sold;
+  }
+
+    struct Auction {
     address payable seller;
     uint256 minBid;
     uint256 tokenID;
@@ -24,7 +41,15 @@ contract Market is ReentrancyGuard  {
     address recipient;
     uint highestBidAmount;
   }
-  mapping(address => mapping(uint => Auction)) public auctions;
+
+    mapping(uint256 => MarketItem) private MarketItemId;
+    mapping(address => mapping(uint => Auction)) public auctions;
+
+
+
+  enum Categories {
+      ART, GAME, DEFI, MEMES
+      }
 
   //doesn't check to see if the auction creator is actually the token holder tho??
   function createAuction(address _tokenAddress, uint _tokenId, uint _minBid, uint _buyNowPrice, uint duration, Categories _category) external {
@@ -91,9 +116,24 @@ contract Market is ReentrancyGuard  {
         return (auctions[_tokenAddress][_tokenId].highestBidAmount > 0);
     }
 
+
+    /*╔══════════════════════════════╗
+      ║    Market Events             ║
+      ╚══════════════════════════════╝*/
+
+    event MarketItemCreated (
+    uint indexed itemId,
+    address indexed nftContract,
+    uint256 indexed tokenId,
+    address seller,
+    address owner,
+    uint256 price,
+    bool sold
+  );
+
     
     /*╔══════════════════════════════╗
-      ║    AUCTION Events            ║
+      ║    Auction Events            ║
       ╚══════════════════════════════╝*/
 
     event AuctionCreated(
