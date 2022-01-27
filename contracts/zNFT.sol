@@ -13,11 +13,11 @@ import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 //imports from the lazy minting guide
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/draft-EIP712Upgradeable.sol";
-import "@openzeppelin/contracts/access/AccessControl.sol";
 
 
 //ZeNFT implementation for ERC721's
-abstract contract ZNFT is Initializable, ERC721Upgradeable, EIP712Upgradeable, ERC721URIStorageUpgradeable, PausableUpgradeable, AccessControlUpgradeable, ERC721BurnableUpgradeable, UUPSUpgradeable {
+ contract ZNFT is Initializable, ERC721Upgradeable, EIP712Upgradeable, ERC721URIStorageUpgradeable, PausableUpgradeable, 
+ AccessControlUpgradeable, ERC721BurnableUpgradeable, UUPSUpgradeable {
     //lazy minter stuff
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
@@ -26,7 +26,6 @@ abstract contract ZNFT is Initializable, ERC721Upgradeable, EIP712Upgradeable, E
     string private constant SIGNATURE_VERSION = "1.0";
     //royalties
     address public artist;
-    address public txFeeToken;
     uint public txFeeAmount;
     mapping(address => bool) public excludedList;
     using CountersUpgradeable for CountersUpgradeable.Counter;
@@ -34,7 +33,6 @@ abstract contract ZNFT is Initializable, ERC721Upgradeable, EIP712Upgradeable, E
 
     CountersUpgradeable.Counter private _tokenIdCounter;
     constructor() initializer {}
-
     function initialize(address payable minter) initializer public {
         __ERC721_init("zNFT", "Zens");
         __EIP712_init("ZeNFT", "1.0");
@@ -74,11 +72,10 @@ abstract contract ZNFT is Initializable, ERC721Upgradeable, EIP712Upgradeable, E
     function _burn(uint256 tokenId) internal override(ERC721Upgradeable, ERC721URIStorageUpgradeable){
         super._burn(tokenId);
     }
-
     function tokenURI(uint256 tokenId)public view override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (string memory){
         return super.tokenURI(tokenId);
     }
-  //here starts the lazy minting
+
   //if you are doing an airdrop then you have to take the minimum price out of it and then the buyer pays the gas fees
   ///Represents an un-minted NFT, which has not yet been recorded into the blockchain. A signed voucher can be redeemed for a real NFT using the redeem function.
   struct NFTVoucher {
@@ -98,7 +95,6 @@ abstract contract ZNFT is Initializable, ERC721Upgradeable, EIP712Upgradeable, E
     // make sure signature is valid and get the address of the signer
     address signer = _verify(voucher);
     // make sure that the signer is authorized to mint NFTs
-    //hasRole
     require(hasRole(MINTER_ROLE, signer), "Signature invalid or unauthorized");
     // make sure that the redeemer is paying enough to cover the buyer's cost
     require(msg.value >= voucher.minPrice, "Insufficient funds to redeem");
@@ -109,6 +105,7 @@ abstract contract ZNFT is Initializable, ERC721Upgradeable, EIP712Upgradeable, E
     _transfer(signer, redeemer, voucher.tokenId);
     // record payment to signer's withdrawal balance
     pendingWithdrawals[signer] += msg.value;
+    //you return the tkenID
     return voucher.tokenId;
   }
 
@@ -160,11 +157,13 @@ abstract contract ZNFT is Initializable, ERC721Upgradeable, EIP712Upgradeable, E
   function supportsInterface(bytes4 interfaceId) public view virtual override (AccessControlUpgradeable, ERC721Upgradeable) returns (bool) {
     return ERC721Upgradeable.supportsInterface(interfaceId) || AccessControlUpgradeable.supportsInterface(interfaceId);
   }
+/*Leftover from royalties
 //sets whether its excluded from paying royalties
   function setExcluded(address excluded, bool status) external {
     require(msg.sender == artist, 'artist only');
     excludedList[excluded] = status;
   }
+*/
 
   function transferFrom(address from, address to, uint256 tokenId) public override {
      require(ownerOf(tokenId) == msg.sender, 'ERC721: transfer caller is not owner nor approved');

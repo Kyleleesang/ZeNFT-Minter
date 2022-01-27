@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import {createVoucher} from "./lib/LazyMinter";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {Route,Link, useHistory} from 'react-router-dom';
@@ -11,6 +12,7 @@ import { getDatabase, ref, child, get,set,update } from "firebase/database";
 import {storage} from "./fire"
 import { getStorage,ref as storRef,uploadBytes,getDownloadURL } from "firebase/storage";
 import Interact from './interact.js';
+import { pinJSONToIPFS } from './utils/pinata';
 
 
 
@@ -52,9 +54,20 @@ function NFT(){
     }
   };
 
+//puts image into json with name and desctiption
+  function JSONMaker (name, description, image){
+    const metadata = new Object();
+    metadata.name = name;
+    metadata.image = image;
+    metadata.description = description;
+    //should return the uri
+    let uri = pinJSONToIPFS(metadata); 
+    //only URI declared right now
+    createVoucher(tokenID, uri, minPrice);
+  }
+
   const handleUpload = async e => {
     e.preventDefault();
-    
     const storageRef = storRef(storage, 'images/'+name);
     uploadBytes(storageRef, image.raw).then((snapshot) => {
         console.log('Uploaded a blob or file!');
@@ -69,7 +82,6 @@ function NFT(){
     // A full list of error codes is available at
     // https://firebase.google.com/docs/storage/web/handle-errors
     switch (error.code) {
-        
       case 'storage/object-not-found':
         // File doesn't exist
         break;
@@ -79,9 +91,7 @@ function NFT(){
       case 'storage/canceled':
         // User canceled the upload
         break;
-
       // ...
-
       case 'storage/unknown':
         // Unknown error occurred, inspect the server response
         break;
@@ -97,7 +107,6 @@ function NFT(){
     uploadBytes(storageRef2, image2.raw).then((snapshot) => {
         console.log('Uploaded a blob or file!');
       });
-    
   };
 
     const LogOut = () =>{
@@ -114,11 +123,8 @@ function NFT(){
     });
     }
     
-    
-    let email = "rbeit508@gmail.com"
     const handleInput1 = event => {
       setName(event.target.value);
-      
     };
   
     const handleInput2 = event => {
@@ -180,24 +186,20 @@ function NFT(){
         else{
             updates['NFTS/'+name+"/"+"Collection"] = "No";
         }
-        
+let description = instagram
+        JSONMaker(name, description,image);
         update(ref(db),updates)
         /* set(ref(db, 'users/' + userid), {
             email: username,
             bio:pass,
             username:name,
-            
-            
           }); */
-
     }
      
     return(
 <div>
 <div className="App-header1" >
-      
-      
-     
+
          <Link className="linker" to='/'>
          <button  className="nav-link">
          Home
@@ -277,32 +279,12 @@ function NFT(){
         </label></div>
       <div className="container">
   <button className="nav-button2" onClick={Update}>Mint</button>
+  <button className="nav-button2" onClick={Update}>Mint</button>
   </div>
       </div>
-      
 
       </div>
-     
-     
-     
-     
-    
-
-
-
-
-
-      
-      
-      
-      
-      
     </header>
-   
-    
-
-   
-
 </div>
     );
 }
