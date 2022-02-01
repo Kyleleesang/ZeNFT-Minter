@@ -1,6 +1,4 @@
-import './App.css';
-import React, { Component }  from 'react';
-import Minter from './Minter';
+
 import logo from './logo.svg';
 import './App.css';
 import { initializeApp } from "firebase/app";
@@ -17,8 +15,11 @@ import Search from './Search';
 import UpdateProfile from "./UpdateProfile";
 import NFT from "./NFT";
 import NFTProfile from './NFTProfile';
+import React, { Component }  from 'react';
+import Minter from './Minter'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
+
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
     
     
     <div >
-                  <Minter></Minter>
+      
             <PrivateRoute exact path="/Profile" component={Profile} />
             <PrivateRoute path="/UpdateProfile" component={UpdateProfile} />
             <PrivateRoute path="/NFT" component={NFT} />
@@ -37,6 +38,7 @@ function App() {
       <Route exact path='/Signup' component={Signup}/>
       <Route exact path='/' component={Home}/>
       <Route exact path='/NFTProfile' component={NFTProfile}/>
+      <Minter></Minter>
      
          
     </div>
@@ -44,7 +46,7 @@ function App() {
     
     
    
-//5a37ff0fa0e88095dc4635700089534dae0dd253
+
   );
 }
 
