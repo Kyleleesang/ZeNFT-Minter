@@ -11,15 +11,17 @@ import Tabs from "./Tabs";
 import { getDatabase, ref, child, get,set,update } from "firebase/database";
 import {storage} from "./fire"
 import { getStorage,ref as storRef,uploadBytes,getDownloadURL } from "firebase/storage";
-import Interact from './interact.js';
+import Interact from './utils/interact';
 import { pinJSONToIPFS } from './utils/pinata';
 
 
 
 function NFT(){
     const [name, setName] = useState(" ");
-    const [pass, setPass] = useState(" ");
-    const [username, setUser] = useState(" ");
+    
+    const[tags,setTags] = useState([]);
+    const [price, setPrice] = useState("0");
+    const[user,setUser] = useState(" ");
     const history = useHistory();
     const db = getDatabase(fire);
     const storage = getStorage();
@@ -30,6 +32,11 @@ function NFT(){
     const[twitter,setTwitter] = useState(" ");
     const[instagram,setInstagram] = useState(" ");
     const[check,setCheck] = useState(false);
+    const[minprice,setMinPrice] = useState(0);
+    const[creator,setCreator] = useState(" ");
+    const[prevent,setPrevent] = useState(0);
+    const[minted,setMinted] = useState("yes");
+    const[description,setDescription] = useState(" ")
 
   const [progress, setProgress] = useState(0);
 
@@ -63,7 +70,22 @@ function NFT(){
     //should return the uri
     let uri = pinJSONToIPFS(metadata); 
     //only URI declared right now
-    createVoucher(tokenID, uri, minPrice);
+    createVoucher(tokenID, uri, price);
+  }
+  if(prevent<1){
+    get(child(dbRef, `users/${localStorage.currentUser}`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+        let user_data = snapshot.val();
+        setCreator(user_data.username);
+        
+      } else {
+        console.log("No data available");
+       console.log(localStorage.currentUser)
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
   }
 
   const handleUpload = async e => {
@@ -128,11 +150,14 @@ function NFT(){
     };
   
     const handleInput2 = event => {
-        setPass(event.target.value);
+        
+        let tagger = event.target.value.split(",");
+        setTags(tagger);
+        console.log(tags);
       };
       const handleInput3 = event => {
-        setUser(event.target.value);
-        console.log(username)
+        setPrice(event.target.value);
+        console.log(price)
         
       };
       const handleInput4 = event => {
@@ -141,14 +166,21 @@ function NFT(){
         
       };
       const handleInput5 = event => {
-        setInstagram(event.target.value);
-        console.log(instagram)
+        setDescription(event.target.value);
+        console.log(description)
         
       };
       const handleInput6 = event => {
         setCheck(event.target.checked);
         
         console.log(check)
+        
+      };
+      const handleInput7 = event => {
+        if(event.target.checked){
+          setMinted("no")
+        }
+        
         
       };
     const Update = () => {
@@ -160,23 +192,30 @@ function NFT(){
             updates['NFTS/'+name+"/"+"Name"] = name
             
         }
-        if(pass !== " "){
-            updates['NFTS/'+name+"/"+"Tags"] = pass.split(",");
+        if(tags !== []){
+            updates['NFTS/'+name+"/"+"Tags"] = tags;
             
         }
-        if(name !== " "){
-            updates['NFTS/'+name+"/"+"Price"] = username;
+        if(price !== "0"){
+            updates['NFTS/'+name+"/"+"Price"] = price;
             
         }
-        if(twitter !== " "){
-            updates['NFTS/'+name+"/"+"Royalties"] = twitter
+        
+            
+            
+        
+        if(creator !== " "){
+            updates['NFTS/'+name+"/"+"Creator"] = creator;
+            updates['NFTS/'+name+"/"+"Owner"] = creator;
+            updates['NFTS/'+name+"/"+"favoritors"] = [creator];
+            updates['NFTS/'+name+"/"+"Minted"] = minted
             
         }
-        if(instagram !== " "){
-            updates['NFTS/'+name+"/"+"instagram"] = instagram
-            
-        }
-        if(url !== " "){
+        
+          
+          
+      
+        if(url !== ""){
             updates['NFTS/'+name+"/"+"Url"] = url;
             
         }
@@ -266,7 +305,7 @@ let description = instagram
       <input className = "input4"  onChange={handleInput4} placeholder="Enter Royalties if any"/>
       </div>
       <div className = "inputdiv2"> 
-      <input className = "input4"  onChange={handleInput5} placeholder="Enter Instagram"/>
+      <input className = "input4"  onChange={handleInput5} placeholder="Set a description"/>
       </div>
       <div className = "inputdiv2"><label>
           Make this a part of a collection
@@ -277,9 +316,18 @@ let description = instagram
             
             onChange={handleInput6} />
         </label></div>
+        <div className = "inputdiv2"><label>
+          Lazy Mint
+          <input
+          className = "input4"
+            name="isGoing"
+            type="checkbox"
+            
+            onChange={handleInput7} />
+        </label></div>
       <div className="container">
   <button className="nav-button2" onClick={Update}>Mint</button>
-  <button className="nav-button2" onClick={Update}>Mint</button>
+  
   </div>
       </div>
 
