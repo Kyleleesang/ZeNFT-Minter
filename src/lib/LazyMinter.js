@@ -1,5 +1,5 @@
 const ethers = require('ethers');
-const zNFT = artifacts.require("../contracts/zNFT.sol");
+let zNFT = artifacts.require("../contracts/zNFT.sol");
 
 // These constants must match the ones used in the smart contract.
 const SIGNING_DOMAIN_NAME = "LazyNFT-Voucher"

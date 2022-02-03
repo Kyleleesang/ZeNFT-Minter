@@ -71,6 +71,8 @@ import "@openzeppelin/contracts-upgradeable/utils/cryptography/draft-EIP712Upgra
     function _burn(uint256 tokenId) internal override(ERC721Upgradeable, ERC721URIStorageUpgradeable){
         super._burn(tokenId);
     }
+
+    //
     function tokenURI(uint256 tokenId)public view override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (string memory){
         return super.tokenURI(tokenId);
     }
@@ -155,6 +157,8 @@ import "@openzeppelin/contracts-upgradeable/utils/cryptography/draft-EIP712Upgra
   function supportsInterface(bytes4 interfaceId) public view virtual override (AccessControlUpgradeable, ERC721Upgradeable) returns (bool) {
     return ERC721Upgradeable.supportsInterface(interfaceId) || AccessControlUpgradeable.supportsInterface(interfaceId);
   }
+
+
 /*Leftover from royalties
 //sets whether its excluded from paying royalties
   function setExcluded(address excluded, bool status) external {
