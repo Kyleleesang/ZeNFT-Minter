@@ -19,7 +19,6 @@ import { pinJSONToIPFS } from './utils/pinata';
 
 function NFT(){
     const [name, setName] = useState(" ");
-    
     const[tags,setTags] = useState([]);
     const [price, setPrice] = useState("0");
     const[user,setUser] = useState(" ");
@@ -206,7 +205,6 @@ function NFT(){
             updates['NFTS/'+name+"/"+"Owner"] = creator;
             updates['NFTS/'+name+"/"+"favoritors"] = [creator];
             updates['NFTS/'+name+"/"+"Minted"] = minted
-            
         }
         
           
