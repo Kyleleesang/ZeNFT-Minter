@@ -120,6 +120,5 @@ contract('Market', async addresses => {
     const balance2 = web3.utils.toBN(await provider.getBalance(seller));
     assert(tokenOwner === buyer3);
     assert(balance2.sub(balance1).toString() === web3.utils.toWei('4'));
-
   });
 });

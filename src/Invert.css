@@ -34,7 +34,7 @@
   .App-header-inverted {
     background-color: #a756bb;
     background-size: 100% 100%;
-    background-image: url(cryptoscape.jpg);
+    background-image: url(images/cryptoscape.jpg);
     min-height: 100vh;
     display: flex;
     flex-direction: row;
@@ -47,7 +47,7 @@
   .App-header2 {
     background-color: #a756bb;
     background-size: 100% 100%;
-    background-image: url(cryptoplanet.jpg);
+    background-image: url(images/cryptoplanet.jpg);
     min-height: 100vh;
     display: flex;
     flex-direction: row;
@@ -59,7 +59,7 @@
   .App-header3 {
     background-color: #a756bb;
     background-size: 100% 100%;
-    background-image: url(purplecrypto.jpg);
+    background-image: url(images/purplecrypto.jpg);
     min-height: 100vh;
     display: flex;
     flex-direction: row;
@@ -71,7 +71,7 @@
   .App-header4 {
     background-color: #a756bb;
     background-size: 100% 100%;
-    background-image: url(cryptolines.jpg);
+    background-image: url(images/cryptolines.jpg);
     min-height: 100vh;
     display: flex;
     flex-direction: row;
@@ -83,7 +83,7 @@
   .App-header5 {
     background-color: #a756bb;
     background-size: 100% 100%;
-    background-image: url(cryptograph.jpg);
+    background-image: url(images/cryptograph.jpg);
     min-height: 100vh;
     display: flex;
     flex-direction: row;
@@ -151,7 +151,7 @@
     font-family:Arial, Helvetica, sans-serif;
     font-weight: bold;
     right:50%;
-    background-image: url(cryptoscape.jpg);
+    background-image: url(images/cryptoscape.jpg);
     border-radius: 5%;
   }
   .App-link {

@@ -13,14 +13,14 @@ export const pinJSONToIPFS = async(JSONBody) => {
                 pinata_api_key: key,
                 pinata_secret_api_key: secret,
             }
-        })
-        .then(function (response) {
+        }).then(function (response) {
            return {
                success: true,
+               //the token response is web2 gateway and not just the file hash
+               //in the future to save on byte space just publish the hash
                pinataUrl: "https://gateway.pinata.cloud/ipfs/" + response.data.IpfsHash
            };
-        })
-        .catch(function (error) {
+        }).catch(function (error) {
             console.log(error)
             return {
                 success: false,

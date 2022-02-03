@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/draft-EIP712Upgradeable.sol";
 
 /// @custom:security-contact Kyle@zenft.app
-contract ZeNFT is Initializable, ERC1155Upgradeable, AccessControlUpgradeable, PausableUpgradeable, ERC1155BurnableUpgradeable {
+contract ZeNFT is Initializable, ERC1155Upgradeable, AccessControlUpgradeable, PausableUpgradeable, ERC1155BurnableUpgradeable, EIP712Upgradeable {
     bytes32 public constant URI_SETTER_ROLE = keccak256("URI_SETTER_ROLE");
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
@@ -59,6 +59,7 @@ contract ZeNFT is Initializable, ERC1155Upgradeable, AccessControlUpgradeable, P
     function supportsInterface(bytes4 interfaceId)public view override(ERC1155Upgradeable, AccessControlUpgradeable)returns (bool){
         return super.supportsInterface(interfaceId);
     }
+    /*
 
     //if you are doing an airdrop then you have to take the minimum price out of it and then the buyer pays the gas fees
   ///Represents an un-minted NFT, which has not yet been recorded into the blockchain. A signed voucher can be redeemed for a real NFT using the redeem function.
@@ -83,7 +84,7 @@ contract ZeNFT is Initializable, ERC1155Upgradeable, AccessControlUpgradeable, P
     // make sure that the redeemer is paying enough to cover the buyer's cost
     require(msg.value >= voucher.minPrice, "Insufficient funds to redeem");
     // first assign the token to the signer, to establish provenance on-chain
-    _mint(signer, voucher.tokenId);
+    _mint(signer, voucher.tokenId, 1, voucher);
     _setURI(voucher.tokenId, voucher.uri);
     // transfer the token to the redeemer
     _safeTransferFrom(signer, redeemer, voucher.tokenId);
@@ -137,5 +138,6 @@ contract ZeNFT is Initializable, ERC1155Upgradeable, AccessControlUpgradeable, P
     bytes32 digest = _hash(voucher);
     return ECDSA.recover(digest, voucher.signature);
   }
+  */
     
 }

@@ -10,16 +10,11 @@
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;    
-    
   }
+
+
+
 }
 .yugi{
   background-color: rgb(57, 11, 100);
@@ -42,7 +37,7 @@
 .App-header {
   background-color: #a756bb;
   background-size: 100% 100%;
-  background-image: url(cryptoscape.jpg);
+  background-image: url(images/cryptoscape.jpg);
   min-height: 100vh;
   display: flex;
   flex-direction: row;
@@ -54,7 +49,7 @@
 .App-header2 {
   background-color: #a756bb;
   background-size: 100% 100%;
-  background-image: url(cryptoplanet.jpg);
+  background-image: url(images/cryptoplanet.jpg);
   min-height: 100vh;
   display: flex;
   flex-direction: row;
@@ -66,7 +61,7 @@
 .App-header3 {
   background-color: #a756bb;
   background-size: 100% 100%;
-  background-image: url(purplecrypto.jpg);
+  background-image: url(images/purplecrypto.jpg);
   min-height: 100vh;
   display: flex;
   flex-direction: row;
@@ -78,7 +73,7 @@
 .App-header4 {
   background-color: #a756bb;
   background-size: 100% 100%;
-  background-image: url(cryptolines.jpg);
+  background-image: url(images/cryptolines.jpg);
   min-height: 100vh;
   display: flex;
   flex-direction: row;
@@ -90,18 +85,15 @@
 .App-header5 {
   background-color: #a756bb;
   background-size: 100% 100%;
-  background-image: url(cryptograph.jpg);
+  background-image: url(images/cryptograph.jpg);
   min-height: 100vh;
   display: flex;
   flex-direction: row;
+
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 .App-header1 {
@@ -163,7 +155,7 @@
   font-family:Arial, Helvetica, sans-serif;
   font-weight: bold;
   right:50%;
-  background-image: url(cryptoscape.jpg);
+  background-image: url(images/cryptoscape.jpg);
   border-radius: 5%;
 }
 .App-link {
@@ -189,6 +181,7 @@ height:20%;
     transform: rotate(360deg);
   }
 }
+
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -288,6 +281,9 @@ margin-bottom: 7%;
 }
 .input4, select, textarea{
   color:rgb(226, 4, 247)
+  
+  
+
 }
 
 

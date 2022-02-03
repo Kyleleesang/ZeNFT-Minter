@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './images/logo.svg';
 import './App.css';
 import './Invert.css';
 import { initializeApp } from "firebase/app";

@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import logo from './logo.svg';
+import logo from './images/logo.svg';
 import './App.css';
 import './NFTProfile.css';
 import { initializeApp } from "firebase/app";

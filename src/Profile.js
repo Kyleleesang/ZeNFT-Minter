@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './images/logo.svg';
 import './App.css';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";

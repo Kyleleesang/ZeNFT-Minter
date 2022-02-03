@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
-
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -24,10 +23,11 @@ import "@openzeppelin/contracts-upgradeable/utils/cryptography/draft-EIP712Upgra
     bytes32 public constant UPGRADER_ROLE = keccak256("DEFAULT_ADMIN_ROLE");
     string private constant SIGNING_DOMAIN = "ZeNFT-Minter";
     string private constant SIGNATURE_VERSION = "1.0";
-    //royalties
+    /*royalties
     address public artist;
     uint public txFeeAmount;
     mapping(address => bool) public excludedList;
+    */
     using CountersUpgradeable for CountersUpgradeable.Counter;
     mapping (address => uint256) pendingWithdrawals;
 
@@ -60,7 +60,6 @@ import "@openzeppelin/contracts-upgradeable/utils/cryptography/draft-EIP712Upgra
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, uri);
     }
-
     function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal whenNotPaused override{
         super._beforeTokenTransfer(from, to, tokenId);
     }
@@ -135,7 +134,6 @@ import "@openzeppelin/contracts-upgradeable/utils/cryptography/draft-EIP712Upgra
       keccak256(bytes(voucher.uri))
     )));
   }
-
   /// notice Returns the chain id of the current blockchain.
   /// @dev This is used to workaround an issue with ganache returning different values from the on-chain chainid() function and
   ///  the eth_chainId RPC method. See https://github.com/protocol/nft-website/issues/121 for context.
@@ -164,7 +162,6 @@ import "@openzeppelin/contracts-upgradeable/utils/cryptography/draft-EIP712Upgra
     excludedList[excluded] = status;
   }
 */
-
   function transferFrom(address from, address to, uint256 tokenId) public override {
      require(ownerOf(tokenId) == msg.sender, 'ERC721: transfer caller is not owner nor approved');
      _transfer(from, to, tokenId);

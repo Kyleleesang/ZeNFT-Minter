@@ -1,7 +1,7 @@
 import './App.css';
 import React, { Component }  from 'react';
 import Minter from './Minter';
-import logo from './logo.svg';
+import logo from './images/logo.svg';
 import './App.css';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
