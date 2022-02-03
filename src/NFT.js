@@ -61,17 +61,7 @@ function NFT(){
     }
   };
 
-//puts image into json with name and desctiption
-  function JSONMaker (name, description, image){
-    const metadata = new Object();
-    metadata.name = name;
-    metadata.image = image;
-    metadata.description = description;
-    //should return the uri
-    let uri = pinJSONToIPFS(metadata); 
-    //only URI declared right now
-    mintNFT();
-  }
+
   if(prevent<1){
     get(child(dbRef, `users/${localStorage.currentUser}`)).then((snapshot) => {
       if (snapshot.exists()) {
@@ -205,6 +195,7 @@ function NFT(){
             updates['NFTS/'+name+"/"+"Owner"] = creator;
             updates['NFTS/'+name+"/"+"favoritors"] = [creator];
             updates['NFTS/'+name+"/"+"Minted"] = minted
+            
         }
         
           

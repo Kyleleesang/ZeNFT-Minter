@@ -3,17 +3,9 @@ import React, { Component }  from 'react';
 import { connectWallet, getCurrentWalletConnected, mintNFT //import here
 } from "./utils/interact.js";
 
-const Minter = (props) => {
 
-  //State variables
-  const [walletAddress, setWallet] = useState("");
-  const [status, setStatus] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [url, setURL] = useState("");
 
 const Minter = (props) => {
-
   //State variables
   const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
@@ -110,6 +102,6 @@ function addWalletListener() {
     </div>
   );
 };
-}
+
 export default Minter;
 

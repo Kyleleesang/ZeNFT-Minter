@@ -71,7 +71,6 @@ import "@openzeppelin/contracts-upgradeable/utils/cryptography/draft-EIP712Upgra
     function _burn(uint256 tokenId) internal override(ERC721Upgradeable, ERC721URIStorageUpgradeable){
         super._burn(tokenId);
     }
-
     //
     function tokenURI(uint256 tokenId)public view override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (string memory){
         return super.tokenURI(tokenId);

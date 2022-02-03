@@ -6,14 +6,6 @@ const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const ethers = ethers.providers.AlchemyProvider([network = "Ropsten" , [alchemyKey]]);
 const contractABI = require('./zNFT-ABI.json')
 const contractAddress = "0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE";
-//// A Web3Provider wraps a standard Web3 provider, which is
-// what MetaMask injects as window.ethereum into each page
-// The MetaMask plugin also allows signing transactions to
-// send ether and pay to change state within the blockchain.
-// For this, you need the account signer...
-const signer = provider.getSigner();
-//if buyer buys NFT
-//then nft.transfer from wallet1 to wallet2
 
 export const connectWallet = async () => {
     if (window.ethereum) {
@@ -119,8 +111,7 @@ export const mintNFT = async(image, name, description) => {
         'data': window.contract.methods.safeMint(window.ethereum.selectedAddress, tokenURI).encodeABI() //make call to NFT smart contract 
     };
     //sign transaction via Metamask
-    try {
-        const txHash = await window.ethereum.request({
+    try {const txHash = await window.ethereum.request({
                 method: 'eth_sendTransaction',
                 params: [transactionParameters],});
         return {
