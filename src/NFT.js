@@ -17,6 +17,7 @@ import { pinJSONToIPFS } from './utils/pinata';
 
 
 
+
 function NFT(){
     const [name, setName] = useState(" ");
     const[tags,setTags] = useState([]);
@@ -36,7 +37,9 @@ function NFT(){
     const[creator,setCreator] = useState(" ");
     const[prevent,setPrevent] = useState(0);
     const[minted,setMinted] = useState("yes");
-    const[description,setDescription] = useState(" ")
+    const[description,setDescription] = useState(" ");
+    const dbRef = ref(getDatabase());
+
 
   const [progress, setProgress] = useState(0);
 
