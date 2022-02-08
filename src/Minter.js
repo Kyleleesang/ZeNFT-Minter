@@ -11,7 +11,7 @@ const Minter = (props) => {
   const [status, setStatus] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [url, setURL] = useState("");
+  const [uri, setURI] = useState("");
  
   useEffect(async () => {
     const {address, status} = await getCurrentWalletConnected();
@@ -26,7 +26,7 @@ const Minter = (props) => {
     setWallet(walletResponse.address);
   };
   const onMintPressed = async () => {
-    const { status } = await mintNFT(url, name, description);
+    const { status } = await mintNFT(uri, name, description);
     setStatus(status);
 };
 
@@ -78,7 +78,7 @@ function addWalletListener() {
         <input
           type="text"
           placeholder="e.g. https://gateway.pinata.cloud/ipfs/<hash>"
-          onChange={(event) => setURL(event.target.value)}
+          onChange={(event) => setURI(event.target.value)}
         />
         <h2>🤔 Name: </h2>
         <input
