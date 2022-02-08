@@ -1,5 +1,6 @@
-const ZeNFT = artifacts.require("ZeNFT.sol");
-const zNFT = artifacts.require("zNFT.sol");
+const artifacts = require ("truffle");
+const ZeNFT = artifacts.require("ZeNFT");
+const zNFT = artifacts.require("zNFT");
 const Market = artifacts.require("Market.sol");
 const zRoyalties = artifacts.require("zRoyalties.sol");
 
