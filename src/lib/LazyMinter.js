@@ -1,4 +1,5 @@
 const ethers = require('ethers');
+const artifacts = require("truffle");
 const zNFT = artifacts.require("./contracts/zNFT.sol");
 
 // These constants must match the ones used in the smart contract.
