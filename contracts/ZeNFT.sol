@@ -15,13 +15,15 @@ contract ZeNFT is Initializable, ERC1155Upgradeable, AccessControlUpgradeable, P
     bytes32 public constant URI_SETTER_ROLE = keccak256("URI_SETTER_ROLE");
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+    bytes32 public constant UPGRADER_ROLE = keccak256("UPGRADER_ROLE");
+
     mapping (address => uint256) pendingWithdrawals;
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() initializer {}
 
-    function initialize() initializer public {
-        __ERC1155_init("");
+    function initialize(string memory URI) initializer public {
+        __ERC1155_init(URI);
         __AccessControl_init();
         __Pausable_init();
         __ERC1155Burnable_init();
@@ -59,7 +61,7 @@ contract ZeNFT is Initializable, ERC1155Upgradeable, AccessControlUpgradeable, P
     function supportsInterface(bytes4 interfaceId)public view override(ERC1155Upgradeable, AccessControlUpgradeable)returns (bool){
         return super.supportsInterface(interfaceId);
     }
-    /*
+    
 
     //if you are doing an airdrop then you have to take the minimum price out of it and then the buyer pays the gas fees
   ///Represents an un-minted NFT, which has not yet been recorded into the blockchain. A signed voucher can be redeemed for a real NFT using the redeem function.
@@ -84,10 +86,10 @@ contract ZeNFT is Initializable, ERC1155Upgradeable, AccessControlUpgradeable, P
     // make sure that the redeemer is paying enough to cover the buyer's cost
     require(msg.value >= voucher.minPrice, "Insufficient funds to redeem");
     // first assign the token to the signer, to establish provenance on-chain
-    _mint(signer, voucher.tokenId, 1, voucher);
-    _setURI(voucher.tokenId, voucher.uri);
+    _mint(signer, voucher.tokenId, 1, abi.encode(voucher));
+    _setURI( voucher.uri);
     // transfer the token to the redeemer
-    _safeTransferFrom(signer, redeemer, voucher.tokenId);
+    _safeTransferFrom(signer, redeemer, voucher.tokenId, 1, "");
     // record payment to signer's withdrawal balance
     pendingWithdrawals[signer] += msg.value;
     //you return the tkenID
@@ -138,6 +140,6 @@ contract ZeNFT is Initializable, ERC1155Upgradeable, AccessControlUpgradeable, P
     bytes32 digest = _hash(voucher);
     return ECDSA.recover(digest, voucher.signature);
   }
-  */
+
     
 }

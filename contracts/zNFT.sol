@@ -23,19 +23,15 @@ import "@openzeppelin/contracts-upgradeable/utils/cryptography/draft-EIP712Upgra
     bytes32 public constant UPGRADER_ROLE = keccak256("DEFAULT_ADMIN_ROLE");
     string private constant SIGNING_DOMAIN = "ZeNFT-Minter";
     string private constant SIGNATURE_VERSION = "1.0";
-    /*royalties
-    address public artist;
-    uint public txFeeAmount;
-    mapping(address => bool) public excludedList;
-    */
+
     using CountersUpgradeable for CountersUpgradeable.Counter;
     mapping (address => uint256) pendingWithdrawals;
 
     CountersUpgradeable.Counter private _tokenIdCounter;
     constructor() initializer {}
-    function initialize(address payable minter) initializer public {
-        __ERC721_init("zNFT", "Zens");
-        __EIP712_init("ZeNFT", "1.0");
+    function initialize(address payable minter, string memory name, string memory symbol) initializer public {
+        __ERC721_init(name, symbol);
+        __EIP712_init(name, "1.0");
         __ERC721URIStorage_init();
         __Pausable_init();
         __ERC721Burnable_init();

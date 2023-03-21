@@ -103,6 +103,19 @@ contract Market is ReentrancyGuard  {
       delete auctions[_tokenAddress][_tokenId];
     }
   }
+
+  function cancelAuction(address _tokenAddress, uint _tokenId) external {
+    require(auctions[_tokenAddress][_tokenId].endDate != 0, 'auction does not exist');
+    require(auctions[_tokenAddress][_tokenId].seller == msg.sender, 'only seller can cancel auction');
+    IERC721(_tokenAddress).transferFrom(address(this), auctions[_tokenAddress][_tokenId].seller, _tokenId);
+    delete auctions[_tokenAddress][_tokenId];
+  }
+
+  function getAuction(address _tokenAddress, uint _tokenId) external view returns (Auction memory) {
+    return auctions[_tokenAddress][_tokenId];
+  }
+
+  
     /*╔══════════════════════════════╗
       ║    AUCTION CHECK FUNCTIONS   ║
       ╚══════════════════════════════╝*/
@@ -114,6 +127,25 @@ contract Market is ReentrancyGuard  {
      */
     function _isBidMade(address _tokenAddress, uint256 _tokenId) internal view returns (bool){
         return (auctions[_tokenAddress][_tokenId].highestBidAmount > 0);
+    }
+
+    /*
+     * Check if an auction is active. This is applicable in the early bid scenario
+     * to ensure that if an auction is created after an early bid, the auction
+     * begins appropriately or is settled if the buy now price is met.
+     */
+    function _isAuctionActive(address _tokenAddress, uint256 _tokenId) internal view returns (bool){
+        return (auctions[_tokenAddress][_tokenId].endDate > block.timestamp);
+    }
+
+    /*
+     * Check if an auction is expired. This is applicable in the early bid scenario
+     * to ensure that if an auction is created after an early bid, the auction
+     * begins appropriately or is settled if the buy now price is met.
+     */
+
+    function _isAuctionExpired(address _tokenAddress, uint256 _tokenId) internal view returns (bool){
+        return (auctions[_tokenAddress][_tokenId].endDate < block.timestamp);
     }
 
 
