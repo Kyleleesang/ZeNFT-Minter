@@ -1,0 +1,46 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.2;
+
+import "@optionality.io/clone-factory/contracts/CloneFactory.sol";
+import "./ZeNFT.sol";
+import "./zNFT.sol";
+
+
+contract ZenFactory is CloneFactory {
+    address public immutable implementation;
+    address public immutable admin;
+    address[] public Zen721s;
+    address[] public Zen1155s;
+    constructor(address _implementation) {
+        implementation = _implementation;
+        admin = msg.sender;
+    }
+
+    
+    function create1155(string memory _name, string memory _symbol, address _minter) external returns (address) {
+        address clone = createClone(implementation);
+        ZeNFT(clone).initialize(_name, _symbol, _minter);
+        Zen1155s.push(clone);
+        return clone;
+    }
+
+    function create721(string memory _name, string memory _symbol, address _minter) external returns (address) {
+        address clone = createClone(implementation);
+        zNFT(clone).initialize(_name, _symbol, _minter);
+        Zen721s.push(clone);
+        return clone;
+    }
+
+    function setLibraryAddress(address _library) external {
+        require(msg.sender == admin, "Only admin can set library address");
+        setLibrary(implementation, _library);
+    }
+
+    function get721s() external view returns (address[] memory) {
+        return Zen721s;
+    }
+
+    function get1155s() external view returns (address[] memory) {
+        return Zen1155s;
+    }
+}
