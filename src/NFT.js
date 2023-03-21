@@ -1,4 +1,4 @@
-import logo from './images/logo.svg';
+import logo from './logo.svg';
 import './App.css';
 import {createVoucher} from "./lib/LazyMinter";
 import { initializeApp } from "firebase/app";
@@ -13,6 +13,9 @@ import {storage} from "./fire"
 import { getStorage,ref as storRef,uploadBytes,getDownloadURL } from "firebase/storage";
 import {Interact, mintNFT} from './utils/interact';
 import { pinJSONToIPFS } from './utils/pinata';
+import Minter from './Minter';
+import './css/minter.css'
+
 
 
 
@@ -36,7 +39,9 @@ function NFT(){
     const[creator,setCreator] = useState(" ");
     const[prevent,setPrevent] = useState(0);
     const[minted,setMinted] = useState("yes");
-    const[description,setDescription] = useState(" ")
+    const[description,setDescription] = useState(" ");
+    const dbRef = ref(getDatabase());
+
 
   const [progress, setProgress] = useState(0);
 
@@ -237,7 +242,12 @@ function NFT(){
          
          <button className="nav-button" onClick = {LogOut} >Logout</button>
       </div>
-<header className="App-header">
+      
+      <Minter   ></Minter>
+      
+      
+<header className="App-header-alpha">
+  
     <div>
 <div> 
       <img src="yinyang.png"className="App-logo" alt="logo" />

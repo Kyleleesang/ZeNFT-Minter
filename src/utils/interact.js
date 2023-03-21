@@ -102,7 +102,7 @@ export const mintNFT = async(image, name, description) => {
     } //the token URI is the return type of the pinataresponse
     const tokenURI = pinataResponse.pinataUrl;  
     //load smart contract
-    window.contract = await new ethers.Contract(contractAddress, contractABI, ethers);//loadContract();
+    window.contract = await new ethers1.Contract(contractAddress, contractABI, ethers);//loadContract();
     //set up your Ethereum transaction
     const transactionParameters = {
         to: contractAddress, // Required except during contract publications.

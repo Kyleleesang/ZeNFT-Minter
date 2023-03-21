@@ -64,7 +64,7 @@ contract ZeNFT is Initializable, ERC1155Upgradeable, AccessControlUpgradeable, P
     
 
     //if you are doing an airdrop then you have to take the minimum price out of it and then the buyer pays the gas fees
-  ///Represents an un-minted NFT, which has not yet been recorded into the blockchain. A signed voucher can be redeemed for a real NFT using the redeem function.
+  //Represents an un-minted NFT, which has not yet been recorded into the blockchain. A signed voucher can be redeemed for a real NFT using the redeem function.
   struct NFTVoucher {
     // The id of the token to be redeemed. Must be unique - if another token with this ID already exists, the redeem function will revert.
     uint256 tokenId;
